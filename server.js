@@ -19,9 +19,6 @@ var options = {
 server.use(function(req, res, next) {
 	//console.log('this is middleware 1', req.body);
 	//res.header('Access-Control-Allow-Origin: *'); //add CORS header to every response
-	console.log('first git commit');
-	console.log('second git commit');
-	
 	next();
 });
 
