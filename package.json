@@ -1,0 +1,21 @@
+{
+  "name": "nz_flora_logger",
+  "version": "1.0.0",
+  "description": "RESTful GIS service",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "tristan.garside@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "hippie": "^0.5.0",
+    "joi": "^9.0.4",
+    "mocha": "^3.0.2",
+    "mongoose": "^4.6.0",
+    "restify": "^4.1.1",
+    "sinon": "^1.17.5"
+  }
+}
