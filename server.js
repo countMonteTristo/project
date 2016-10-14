@@ -6,6 +6,7 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.bodyParser());
 
 //PUSH change from linux machine
+//PUSH from windows box
 /*** set up db **********/
 var mongoose = require('mongoose');
 
