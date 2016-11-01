@@ -15,6 +15,10 @@ var ReportSchema = new Schema({
 		type: Number,
 		required: true
 	},
+	altitude: {
+		type: Number,
+		required: false
+	},
 	accuracy: {
 		type: Number,
 		required: false

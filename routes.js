@@ -51,21 +51,25 @@ server.get('report/:id', function(req, res, next) {
 //POST new report ***********************************************************************
 server.post('/report', function( req, res, next) {
 	console.log(req.params);
-	
-	checkMandatoryFields(req, res, next);	
-	
+
+	checkMandatoryFields(req, res, next);
+
 	var reportData = {
 		longitude: req.params.longitude,
 		latitude: req.params.latitude,
 		timestamp: req.params.timestamp,
 	}
 
-	if(req.params.accuracy) { 
+	if(req.params.altitude) {
+		reportData.altitude = req.params.altitude;
+	}
+
+	if(req.params.accuracy) {
 		reportData.accuracy = req.params.accuracy;
 	}
-	
+
 	var report = new Report(reportData);
-	
+
 	report.save(function(error, data) {
 		if (error) {
 			return next(new restify.BadRequestError(JSON.stringify(error.errors)));
@@ -79,21 +83,25 @@ server.post('/report', function( req, res, next) {
 
 //PUT to update existing user ******************************************************
 server.put('/report/:id', function (req, res, next) {
-	
-	checkMandatoryFields(req, res, next);	
-	 
+
+	checkMandatoryFields(req, res, next);
+
 	var reportData = {
 		longitude: req.params.longitude,
 		latitude: req.params.latitude,
 		timestamp: req.params.timestamp
 	}
-	
-	if(req.params.accuracy) { 
+
+	if(req.params.altitude) {
+		reportData.altitude = req.params.altitude;
+	}
+
+	if(req.params.accuracy) {
 		reportData.accuracy = req.params.accuracy;
 	}
-	
+
 	var report = new Report(reportData);
-	
+
 	Report.update( {_id: req.params.id}, reportData, {multi:false},
 		function(error, report) {
 			if (error) {
@@ -104,7 +112,7 @@ server.put('/report/:id', function (req, res, next) {
 				res.send(200, report);
 			}
 		}
-	)	
+	)
 });
 
 //DELETE to delete a specific report
