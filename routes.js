@@ -50,7 +50,7 @@ server.get('report/:id', function(req, res, next) {
 
 //POST new report ***********************************************************************
 server.post('/report', function( req, res, next) {
-	console.log(req.params);
+	//console.log(req.params);
 
 	checkMandatoryFields(req, res, next);
 
@@ -122,6 +122,17 @@ server.del('/report/:id', function (req, res, next) {
 		res.send(200, report);
 	});
 });
+
+//DELETE ALL REPORTS (!)
+server.del('/report', function (req, res, next) {
+	Report.remove( {}, function (error, report) {
+		if (error) return next(new restify.InternalServerError(JSON.stringify(error.errors)))
+		res.send(200, report);
+	});
+});
+
+
+
 
 checkMandatoryFields = function(req, res, next) {
 	//Check mandatory fields provided

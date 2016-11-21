@@ -130,6 +130,8 @@ describe('Reports routes endpoints tests', function() {
 			});
 		});
 
+	/************************* delete single report **********************************/
+
 	it('should delete a SINGLE Report on /report/:id DELETE', function(done) {
 		chai.request(server)
 			.get('/report')
@@ -142,6 +144,37 @@ describe('Reports routes endpoints tests', function() {
 				response.body.should.be.a('object');
 				done();
 			});
+		});
+
+	});
+
+	/************************* delete ALL reports (!!!) *************************/
+	it('should delete ALL reports on /report DELETE', function(done) {
+		// First add another report so testing collection of 2 reports
+		chai.request(server)
+			.post('/report')
+			//.set('content-type', 'application/json')
+			.send({'longitude': '222222', 'latitude':'222222', 'timestamp':'222222222',
+						'altitude': '22', 'accuracy': '22'})
+			.end(function(error, response) {
+				response.should.have.status(201);
+				response.body.should.be.a('object');
+			});
+
+		//test the delete all function itself
+		chai.request(server)
+			.delete('/report')
+			.end(function(error, response) {
+				response.should.have.status(200);
+		});
+
+		//finally verify collection is empty
+		chai.request(server)
+			.get('/report')
+			.end(function(err, res){
+				res.should.have.status(200);
+				res.body.should.be.empty;
+			done();
 		});
 	});
 });
